@@ -16,12 +16,14 @@ $router = new Router();
 // Add the routes
 $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('posts', ['controller' => 'Posts', 'action' => 'index']);
-$router->add('posts/new', ['controller' => 'Posts', 'action' => 'new']);
-    
-// //Display the routing table
-//echo '<pre>';
+//$router->add('posts/new', ['controller' => 'Posts', 'action' => 'new']);
+$router->add('{controller}/{action}');
+$router->add('{controller}/{teat}');
+// Display the routing table
+echo '<pre>';
 //var_dump($router->getRoutes());
-//echo '</pre>';
+echo htmlspecialchars(print_r($router->getRoutes(), true));
+echo '</pre>';
 
 
 // Match the requested route
@@ -34,4 +36,3 @@ if ($router->match($url)) {
 } else {
     echo "No route found for URL '$url'";
 }
-
