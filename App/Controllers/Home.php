@@ -3,10 +3,8 @@
 namespace App\Controllers;
 /**
  * Home controller
- *
- * PHP version 5.4
  */
-class Home
+class Home extends \Core\Controller
 {
 
     /**

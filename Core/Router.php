@@ -1,12 +1,9 @@
 <?php
 
 namespace Core;
-use http\Url;
 
 /**
  * Router
- *
- * PHP version 5.4
  */
 class Router
 {
@@ -110,7 +107,7 @@ class Router
             $controller = "App\Controllers\\$controller";
 
             if (class_exists($controller)) {
-                $controller_object = new $controller();
+                $controller_object = new $controller($this->params);
 
                 $action = $this->params['action'];
                 $action = $this->convertToCamelCase($action);
