@@ -12,7 +12,7 @@ class Home extends \Core\Controller
      *
      * @return void
      */
-    public function index()
+    public function indexAction()
     {
         echo 'Hello from the index action in the Home controller!';
     }
