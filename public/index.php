@@ -51,5 +51,9 @@ if ($router->match($url)) {
 } else {
     echo "No route found for URL '$url'";
 }
-*/
+
+ */
 $router->dispatch($_SERVER['QUERY_STRING']);
+
+
+
