@@ -12,7 +12,6 @@ require '../App/Controllers/Posts.php';
 /**
  * Routing
  */
-require '../Core/Router.php';
 
 $router = new Router();
 
