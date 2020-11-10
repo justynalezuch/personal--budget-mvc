@@ -2,9 +2,6 @@
 
 namespace Core;
 
-/**
- * Router
- */
 class Router
 {
 

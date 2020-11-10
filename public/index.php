@@ -29,7 +29,15 @@ $router->add('{controller}/{action}');
 $router->add('{controller}/{id:\d+}/{action}');
 $router->add('admin/{controller}/{action}', ['namespace' => 'Admin']);
 
-$router->dispatch($_SERVER['QUERY_STRING']);
+//$router->dispatch($_SERVER['QUERY_STRING']);
+
+$var_array = array("color" => "blue",
+    "size"  => "medium",
+    "shape" => "sphere");
+extract($var_array, EXTR_PREFIX_SAME, "wddx");
+
+echo "$color, $size, $shape";
+
 
 
 
