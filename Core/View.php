@@ -37,8 +37,8 @@ class View
 
         if ($twig === null) {
             //$loader = new \Twig_Loader_Filesystem('../App/Views');
-            $loader = new \Twig_Loader_Filesystem(dirname(__DIR__) . '/App/Views');
-            $twig = new \Twig_Environment($loader);
+            $loader = new \Twig\Loader\FilesystemLoader(dirname(__DIR__) . '/App/Views');
+            $twig =  new \Twig\Environment($loader);
         }
 
         echo $twig->render($template, $args);
