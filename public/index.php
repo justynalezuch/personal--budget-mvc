@@ -5,17 +5,15 @@
  */
 require_once '../vendor/autoload.php';
 
-///**
-// * Autoloader
-// */
-//spl_autoload_register(function ($class) {
-//   $root = dirname(__DIR__); //parent directory
-//    $file = $root .'/'. str_replace('\\', '/', $class) . '.php';
-//    if(is_readable($file)) {
-//        require $file;
-//    }
-//});
+/**
+ * Error and Exception handling
+ */
+set_error_handler('Core\Error::errorHandler');
+set_exception_handler('Core\Error::exceptionHandler');
 
+/**
+ * Routing
+ */
 
 $router = new Core\Router();
 $router->add('', ['controller' => 'Home', 'action' => 'index']);

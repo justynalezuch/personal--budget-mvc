@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use mysql_xdevapi\Exception;
+
 /**
  * Base controller
  */
@@ -41,7 +43,8 @@ abstract class Controller
                 $this->after();
             }
         } else {
-            echo "Method $method not found in controller " .  get_class($this);
+            throw new \Exception("Method $method not found in controller ". get_class($this));
+
         }
     }
 
