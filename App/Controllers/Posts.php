@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use \Core\View;
+use \App\Models\Post;
 
 /**
  * Posts controller
@@ -25,9 +26,9 @@ class Posts extends \Core\Controller
 //        echo 'Hello from the index action in the Posts controller!';
         //echo '<p>Query string parameters: <pre>' .
         //     htmlspecialchars(print_r($_GET, true)) . '</pre></p>';
+        $posts = Post::getAll();
         View::renderTemplate('Posts/index.html', [
-            'name' => "Adam",
-            "colours" => ['red', 'blue']
+            'posts' => $posts,
         ]);
     }
 
