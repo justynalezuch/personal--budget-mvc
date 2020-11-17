@@ -3,17 +3,15 @@
 namespace App\Controllers;
 
 use \Core\View;
+
 /**
  * Home controller
+ *
+ * PHP version 7.0
  */
 class Home extends \Core\Controller
 {
 
-    protected function before()
-    {
-        // Make sure an admin user is logged in for example
-        // return false;
-    }
     /**
      * Show the index page
      *
@@ -21,11 +19,6 @@ class Home extends \Core\Controller
      */
     public function indexAction()
     {
-        View::renderTemplate('Home/indhex.html', [
-            'name' => "Adam",
-            "colours" => ['red', 'blue']
-            ]);
-//        echo 'Hello from the index action in the Home controller!';
+        View::renderTemplate('Home/index.html');
     }
-
 }
