@@ -1,0 +1,12 @@
+[18-Nov-2020 09:13:43 Europe/Berlin] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\xampp\htdocs\personal-budget\public\index.php(23): Core\Router->dispatch('favicon.ico')
+#1 {main}
+Thrown in 'C:\xampp\htdocs\personal-budget\Core\Router.php' on line 122
+[18-Nov-2020 09:17:52 Europe/Berlin] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\xampp\htdocs\personal-budget\public\index.php(23): Core\Router->dispatch('favicon.ico')
+#1 {main}
+Thrown in 'C:\xampp\htdocs\personal-budget\Core\Router.php' on line 122
+[18-Nov-2020 10:15:14 Europe/Berlin] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\xampp\htdocs\personal-budget\public\index.php(23): Core\Router->dispatch('HNAP1/')
+#1 {main}
+Thrown in 'C:\xampp\htdocs\personal-budget\Core\Router.php' on line 122

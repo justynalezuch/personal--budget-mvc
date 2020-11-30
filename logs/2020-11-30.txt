@@ -1,0 +1,17 @@
+[30-Nov-2020 14:41:32 Europe/Berlin] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\xampp\htdocs\personal-budget\public\index.php(23): Core\Router->dispatch('favicon.ico')
+#1 {main}
+Thrown in 'C:\xampp\htdocs\personal-budget\Core\Router.php' on line 122
+[30-Nov-2020 15:15:45 Europe/Berlin] Uncaught exception: 'Exception' with message 'No route matched.'
+Stack trace: #0 C:\xampp\htdocs\personal-budget\public\index.php(23): Core\Router->dispatch('HNAP1/')
+#1 {main}
+Thrown in 'C:\xampp\htdocs\personal-budget\Core\Router.php' on line 122
+[30-Nov-2020 15:19:38 Europe/Berlin] Uncaught exception: 'ErrorException' with message 'Undefined property: App\Models\User::$password'
+Stack trace: #0 C:\xampp\htdocs\personal-budget\App\Models\User.php(28): Core\Error::errorHandler(8, 'Undefined prope...', 'C:\\xampp\\htdocs...', 28, Array)
+#1 C:\xampp\htdocs\personal-budget\App\Controllers\Signup.php(34): App\Models\User->save()
+#2 [internal function]: App\Controllers\SignUp->createAction()
+#3 C:\xampp\htdocs\personal-budget\Core\Controller.php(42): call_user_func_array(Array, Array)
+#4 C:\xampp\htdocs\personal-budget\Core\Router.php(114): Core\Controller->__call('create', Array)
+#5 C:\xampp\htdocs\personal-budget\public\index.php(23): Core\Router->dispatch('signup/create')
+#6 {main}
+Thrown in 'C:\xampp\htdocs\personal-budget\App\Models\User.php' on line 28
