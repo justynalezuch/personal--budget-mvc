@@ -33,7 +33,7 @@ class User extends \Core\Model
     public function save()
     {
         $this->validate();
-        
+
         if(empty($this->errors)) {
             $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
 
@@ -78,6 +78,10 @@ class User extends \Core\Model
             $this->errors[] = 'Podaj poprawny adres email.';
         }
 
+        if($this->emailExists($this->email)) {
+            $this->errors[] = 'Istnieje już konto zarejestrowane na podany adres email.';
+        }
+
         if(strlen($this->email) >50) {
             $this->errors[] = "Adres email nie może być dłuższy niż 50 znaków.";
         }
@@ -98,5 +102,25 @@ class User extends \Core\Model
         if (preg_match('/.*\d+.*/i', $this->password) == 0) {
             $this->errors[] = 'Hasło musi posiadać co najmniej jedną cyfrę.';
         }
+    }
+
+    /**
+     * Check if email already exist.
+     *
+     * @param $email
+     * @return bool
+     */
+    public function emailExists($email){
+
+        $sql = 'SELECT * FROM users WHERE email = :email';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        return $stmt->fetch() !== false;
+
     }
 }
