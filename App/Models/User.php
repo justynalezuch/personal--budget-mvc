@@ -18,7 +18,7 @@ class User extends \Core\Model
      */
     public $errors = [];
 
-    public function __construct($data)
+    public function __construct($data = [])
     {
         foreach ($data as $key => $value) {
             $this->$key = $value;
@@ -34,7 +34,7 @@ class User extends \Core\Model
     {
         $this->validate();
 
-        if(empty($this->errors)) {
+        if (empty($this->errors)) {
             $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
 
             $sql = 'INSERT INTO users (name, email, password_hash)
@@ -65,11 +65,11 @@ class User extends \Core\Model
             $this->errors[] = 'Podaj nazwę użytkownika';
         }
 
-        if(ctype_alnum($this->name) == false) {
+        if (ctype_alnum($this->name) == false) {
             $this->errors[] = "Nazwa użytkownika może składać się tylko z liter i cyfr (bez polskich znaków)";
         }
 
-        if(strlen($this->name) < 3 || strlen($this->name) > 50) {
+        if (strlen($this->name) < 3 || strlen($this->name) > 50) {
             $this->errors[] = "Nazwa użytkownika powinna być nie krótsza niż 3 znaki i nie dłuższa niż 50 znaków.";
         }
 
@@ -78,11 +78,11 @@ class User extends \Core\Model
             $this->errors[] = 'Podaj poprawny adres email.';
         }
 
-        if(static::emailExists($this->email)) {
+        if (static::emailExists($this->email)) {
             $this->errors[] = 'Istnieje już konto zarejestrowane na podany adres email.';
         }
 
-        if(strlen($this->email) >50) {
+        if (strlen($this->email) > 50) {
             $this->errors[] = "Adres email nie może być dłuższy niż 50 znaków.";
         }
 
@@ -110,7 +110,13 @@ class User extends \Core\Model
      * @param $email
      * @return bool
      */
-    public static function emailExists($email){
+    public static function emailExists($email)
+    {
+        return static::findByEmail($email) !== false;
+    }
+
+    public static function findByEmail($email)
+    {
 
         $sql = 'SELECT * FROM users WHERE email = :email';
 
@@ -118,9 +124,10 @@ class User extends \Core\Model
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
 
+        $stmt->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
         $stmt->execute();
 
-        return $stmt->fetch() !== false;
-
+        return $stmt->fetch();
     }
 }

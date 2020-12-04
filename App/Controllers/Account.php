@@ -5,7 +5,7 @@ namespace App\Controllers;
 use \App\Models\User;
 
 /**
- * Home controller
+ * Account controller
  *
  * PHP version 7.0
  */
