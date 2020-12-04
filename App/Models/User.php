@@ -78,7 +78,7 @@ class User extends \Core\Model
             $this->errors[] = 'Podaj poprawny adres email.';
         }
 
-        if($this->emailExists($this->email)) {
+        if(static::emailExists($this->email)) {
             $this->errors[] = 'Istnieje już konto zarejestrowane na podany adres email.';
         }
 
@@ -110,7 +110,7 @@ class User extends \Core\Model
      * @param $email
      * @return bool
      */
-    public function emailExists($email){
+    public static function emailExists($email){
 
         $sql = 'SELECT * FROM users WHERE email = :email';
 

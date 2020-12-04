@@ -71,6 +71,7 @@
                 email: {
                     required: true,
                     email: true,
+                    remote: '/account/validate-email'
                 },
                 password: {
                     required: true,
@@ -79,6 +80,11 @@
                 },
                 password_confirmation: {
                     equalTo: '#inputPassword'
+                }
+            },
+            messages: {
+                email: {
+                    remote: "Istnieje już konto zarejstrowane na podany adres email."
                 }
             }
         });
