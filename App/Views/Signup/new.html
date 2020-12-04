@@ -31,11 +31,11 @@
           <input type="password" id="inputPassword" name="password"
                  placeholder="Password" />
       </div>
-      <div>
-          <label for="inputPasswordConfirmation">Repeat password</label>
-          <input type="password" id="inputPasswordConfirmation" name="password_confirmation"
-                 placeholder="Repeat password" />
-      </div>
+<!--      <div>-->
+<!--          <label for="inputPasswordConfirmation">Repeat password</label>-->
+<!--          <input type="password" id="inputPasswordConfirmation" name="password_confirmation"-->
+<!--                 placeholder="Repeat password" />-->
+<!--      </div>-->
 
       <button type="submit">Sign up</button>
     </form>
@@ -43,6 +43,7 @@
 {% endblock %}
 
 {% block footer %}
+<script src="/js/hideShowPassword.min.js"></script>
 <script>
     $.validator.addMethod('validPassword',
         function(value, element, param) {
@@ -78,15 +79,17 @@
                     minlength: 6,
                     validPassword: true
                 },
-                password_confirmation: {
-                    equalTo: '#inputPassword'
-                }
             },
             messages: {
                 email: {
                     remote: "Istnieje już konto zarejstrowane na podany adres email."
                 }
             }
+        });
+
+        $('#inputPassword').hideShowPassword({
+            show: false,
+            innerToggle: 'focus'
         });
     });
 </script>

@@ -87,9 +87,9 @@ class User extends \Core\Model
         }
 
         // Password
-        if ($this->password != $this->password_confirmation) {
-            $this->errors[] = 'Podane hasła różnią się od siebie.';
-        }
+//        if ($this->password != $this->password_confirmation) {
+//            $this->errors[] = 'Podane hasła różnią się od siebie.';
+//        }
 
         if (strlen($this->password) < 8 || strlen($this->password) > 20) {
             $this->errors[] = "Hasło musi posiadać od 8 do 20 znaków.";
