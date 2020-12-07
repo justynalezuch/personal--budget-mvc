@@ -115,6 +115,12 @@ class User extends \Core\Model
         return static::findByEmail($email) !== false;
     }
 
+    /**
+     * Find user by email.
+     *
+     * @param $email
+     * @return mixed
+     */
     public static function findByEmail($email)
     {
 
@@ -129,5 +135,25 @@ class User extends \Core\Model
         $stmt->execute();
 
         return $stmt->fetch();
+    }
+
+    /**
+     * Authenticate user
+     *
+     * @param $email
+     * @param $password
+     * @return bool
+     */
+    public static function authenticate($email, $password)
+    {
+        $user = static::findByEmail($email);
+
+        if($user) {
+            if(password_verify($password, $user->password_hash)) {
+                return $user;
+            }
+        }
+
+        return false;
     }
 }
