@@ -5,6 +5,11 @@
 {% block body %}
 
     <h1>Welcome</h1>
-    <a href="/login">Log in</a> or <a href="/signup/new">Sign up</a>
+
+    {% if session.user_id %}
+        User ID: {{ session.user_id }}
+    {% else %}
+     <a href="/login">Log in</a> or <a href="/signup/new">Sign up</a>
+    {% endif %}
 
 {% endblock %}
