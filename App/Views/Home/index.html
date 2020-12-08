@@ -6,7 +6,8 @@
 
     <h1>Welcome</h1>
 
-    {% if is_logged_in %}
+    {% if current_user %}
+        <p>Hello {{ user.name }}!</p>
         <a href="/logout">Log out</a>
     {% else %}
      <a href="/login">Log in</a> or <a href="/signup/new">Sign up</a>

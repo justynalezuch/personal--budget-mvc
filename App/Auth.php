@@ -4,6 +4,8 @@
 namespace App;
 
 
+use App\Models\User;
+
 class Auth
 {
 
@@ -32,10 +34,10 @@ class Auth
         session_destroy();
     }
 
-    public static function isLoggedIn() {
-
-        return isset($_SESSION['user_id']);
-    }
+//    public static function isLoggedIn() {
+//
+//        return isset($_SESSION['user_id']);
+//    }
 
     /**
      * Remember the originally requested page in the session.
@@ -51,6 +53,19 @@ class Auth
      */
     public static function getReturnToPage() {
         return $_SESSION['return_to'] ?? '/';
+    }
+
+    /**
+     * Get the current logged in user
+     *
+     * @return mixed The user model or null
+     */
+
+    public static function getUser() {
+
+        if(isset($_SESSION['user_id'])) {
+           return User::findByID($_SESSION['user_id']);
+        }
     }
 
 }
