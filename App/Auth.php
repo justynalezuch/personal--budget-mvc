@@ -37,4 +37,20 @@ class Auth
         return isset($_SESSION['user_id']);
     }
 
+    /**
+     * Remember the originally requested page in the session.
+     */
+    public static function rememberRequestedPage() {
+        $_SESSION['return_to'] = $_SERVER['REQUEST_URI'];
+    }
+
+    /**
+     * Get the requested page to return to after requiring login, or default - home page
+     *
+     * @return mixed|string
+     */
+    public static function getReturnToPage() {
+        return $_SESSION['return_to'] ?? '/';
+    }
+
 }
