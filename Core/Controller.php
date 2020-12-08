@@ -2,6 +2,7 @@
 
 namespace Core;
 
+use App\Auth;
 use mysql_xdevapi\Exception;
 
 /**
@@ -65,5 +66,16 @@ abstract class Controller
     public function redirect($url) {
         header('Location: http://' . $_SERVER['HTTP_HOST'] . $url,  true, 303);
         exit;
+    }
+
+    /**
+     * Require user to login, remember requested page.
+     */
+    public function requireLogin() {
+
+        if(! Auth::isLoggedIn()) {
+            Auth::rememberRequestedPage();
+            $this->redirect('/login');
+        }
     }
 }
