@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Flash;
 use App\Models\User;
 use \Core\View;
 use \App\Auth;
@@ -38,8 +39,20 @@ class Login extends \Core\Controller
 
     }
 
+    /**
+     * Log out user, redirect to new request - to start new session and show logout message.
+     */
     public function destroyAction() {
         Auth::logout();
+        $this->redirect('/login/show-logout-message');
+    }
+
+    /**
+     * Show a "logged out" flash message.
+     */
+    public function showLogoutMessageAction() {
+
+        Flash::addMessage('Wylogowałeś się poprawnie.');
         $this->redirect('/');
     }
 
