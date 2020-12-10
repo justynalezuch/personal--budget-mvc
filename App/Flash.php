@@ -7,15 +7,24 @@ namespace App;
 class Flash
 {
     /**
+     * Message types
+     */
+    const SUCCESS = 'success';
+    const INFO = 'info';
+    const WARNING = 'warning';
+    /**
      * @param $message
      */
-    public static function addMessage($message) {
+    public static function addMessage($message, $type = 'success') {
 
         if(! isset($_SESSION['flash_notifications'])) {
             $_SESSION['flash_notifications'] = [];
         }
 
-        $_SESSION['flash_notifications'][] = $message;
+        $_SESSION['flash_notifications'][] = [
+          'body' => $message,
+          'type' => $type
+        ];
     }
 
     /**

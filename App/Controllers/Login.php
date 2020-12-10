@@ -29,9 +29,14 @@ class Login extends \Core\Controller
        $user = User::authenticate($_POST['email'], $_POST['password']);
        if($user) {
            Auth::login($user);
+
+           Flash::addMessage('Zalogowałeś się poprawnie.');
+
            $this->redirect(Auth::getReturnToPage());
        }
        else {
+           Flash::addMessage('Logowanie nie powiodło się, spróbuj ponownie.', Flash::WARNING);
+
            View::renderTemplate('Login/new.html', [
                'email' => $_POST['email']
            ]);
