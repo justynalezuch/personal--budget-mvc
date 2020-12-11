@@ -3,6 +3,9 @@
 /**
  * Front controller
  */
+
+ini_set('session.cookie_lifetime', 846000);
+
 require_once '../vendor/autoload.php';
 
 /**
