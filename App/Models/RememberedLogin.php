@@ -29,4 +29,12 @@ class RememberedLogin extends \Core\Model
         return User::findByID($this->user_id);
     }
 
+    /**
+     * Check if remembered token has expired
+     * @return bool
+     */
+    public function hasExpired() {
+        return (strtotime($this->expires_at) < time());
+    }
+
 }
