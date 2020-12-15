@@ -4,11 +4,16 @@
 namespace App;
 
 
+use App\Models\RememberedLogin;
 use App\Models\User;
 
 class Auth
 {
 
+    /**
+     * @param $user
+     * @param $remember_me Remember the login if true
+     */
     public static function login($user, $remember_me) {
 
         session_regenerate_id(true);
@@ -71,6 +76,22 @@ class Auth
 
         if(isset($_SESSION['user_id'])) {
            return User::findByID($_SESSION['user_id']);
+        } else {
+
+        }
+    }
+
+    protected static function loginFromRememberCookie($user, $remember_me) {
+        $cookie = $_COOKIE['remember_me'] ?? false;
+        $_SESSION['user_id'] = $user->id;
+
+        if($cookie) {
+            $remembered_login = RememberedLogin::findByToken($cookie);
+
+            if($remembered_login) {
+                setcookie('remember_me', $user->remember_token, $user->expiry_timestamp, '/');
+            }
+
         }
     }
 
