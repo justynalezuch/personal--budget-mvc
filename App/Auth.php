@@ -43,12 +43,10 @@ class Auth
 
         // Finally, destroy the session.
         session_destroy();
+
+        static::forgetLogin();
     }
 
-//    public static function isLoggedIn() {
-//
-//        return isset($_SESSION['user_id']);
-//    }
 
     /**
      * Remember the originally requested page in the session.
@@ -75,11 +73,9 @@ class Auth
     public static function getUser() {
 
         if(isset($_SESSION['user_id'])) {
-
-           return User::findByID($_SESSION['user_id']);
+            return User::findByID($_SESSION['user_id']);
 
         } else {
-
             return static::loginFromRememberCookie();
         }
     }
@@ -96,5 +92,23 @@ class Auth
                 return $user;
             }
         }
+    }
+
+    protected static function forgetLogin() {
+
+        $cookie = $_COOKIE['remember_me'] ?? false;
+
+        if($cookie) {
+
+            $remembered_login = RememberedLogin::findByToken($cookie);
+
+            if($remembered_login) {
+
+                $remembered_login->delete();
+            }
+
+            setcookie('remember_me', '', time() - 3600);  // set to expire in the past
+        }
+
     }
 }
