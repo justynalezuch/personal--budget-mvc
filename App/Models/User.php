@@ -210,7 +210,49 @@ class User extends \Core\Model
         $user = static::findByEmail($email);
 
         if($user) {
-
+            if($user->startPasswordReset()) {
+                $user->sendPasswordResetEmail();
+            }
         }
+    }
+
+    /**
+     * Start password reset, generate new token and expiry
+     * @return mixed
+     * @throws \Exception
+     */
+    protected function startPasswordReset() {
+
+        $token = new Token();
+        $token_hash = $token->getHash();
+        $this->password_reset_token = $token->getValue();
+
+        $expiry_timestamp = time() + 60 * 60 * 2; // 2 hours from now
+
+        $sql = 'UPDATE users
+                SET password_reset_hash = :password_reset_hash,
+                    password_reset_expires_at = :password_reset_expires_at
+                WHERE id = :id';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':password_reset_hash', $token_hash, PDO::PARAM_STR);
+        $stmt->bindValue(':password_reset_expires_at', date('Y-m-d H:i:s', $expiry_timestamp), PDO::PARAM_STR);
+        $stmt->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+        return $stmt->execute();
+    }
+
+    protected function sendPasswordResetEmail() {
+
+        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/password/reset/' . $this->password_reset_token;
+
+        $altbody = "Please click on the following URL to reset your password: $url";
+        $body = "Please click <a href=\"$url\">here</a> to reset your password";
+
+        \App\Mail::send($this->email, 'Password reset', $body, $altbody);
+
+
     }
 }

@@ -34,14 +34,14 @@ class Config
      */
     const DB_PASSWORD = '';
 
-//    /**
-//     * Show or hide error messages on screeen
-//     * @var boolean
-//     */
-//    const SHOW_ERRORS = true;
-//
-//    /**
-//     * Secret key for hashing
-//     */
-//    const SECRET_KEY = 'mc5ROqOaN1fjSjhVQUUi4cPl7cUhRdSP';
+    /**
+     * Show or hide error messages on screeen
+     * @var boolean
+     */
+    const SHOW_ERRORS = true;
+
+    /**
+     * Secret key for hashing
+     */
+    const SECRET_KEY = 'mc5ROqOaN1fjSjhVQUUi4cPl7cUhRdSP';
 }
