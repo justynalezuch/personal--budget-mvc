@@ -34,7 +34,7 @@ class Mail {
             );
 
             //Recipients
-            $mail->setFrom('no-reply@justynakuta.pl', 'Mailer');
+            $mail->setFrom('no-reply@justynakuta.pl', 'Password Reset - finances.justynakuta.pl');
             $mail->addAddress('justynalezuch@gmail.com', '');
 
             // Content
