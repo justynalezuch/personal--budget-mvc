@@ -2,8 +2,6 @@
 
 namespace Core;
 
-use mysql_xdevapi\Exception;
-
 class View
 {
 

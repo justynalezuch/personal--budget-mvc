@@ -21,13 +21,13 @@ class Home extends \Core\Controller
      */
     public function indexAction()
     {
-        \App\Mail::send(
-            'justynalezuch@gmail.com',
-            'Here is the subject',
-            'This is the HTML message body <b>in bold!</b>',
-            'Alt body'
-
-            );
+//        \App\Mail::send(
+//            'justynalezuch@gmail.com',
+//            'Here is the subject',
+//            'This is the HTML message body <b>in bold!</b>',
+//            'Alt body'
+//
+//            );
 
         View::renderTemplate('Home/index.html', [
             'user' => Auth::getUser()
