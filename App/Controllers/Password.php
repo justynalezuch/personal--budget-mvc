@@ -34,7 +34,23 @@ class Password extends \Core\Controller
         $user = User::findByPasswordReset($token);
 
         if($user) {
-            View::renderTemplate('Password/reset.html');
+            View::renderTemplate('Password/reset.html', [
+                'token' => $token
+            ]);
+        } else {
+            echo 'token invalid';
+        }
+    }
+
+    /**
+     * Reset the user's password
+     */
+    public function resetPasswordAction() {
+
+        $user = User::findByPasswordReset($_POST['token']);
+
+        if($user) {
+            echo 'reset';
         } else {
             echo 'token invalid';
         }
