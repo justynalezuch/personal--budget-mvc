@@ -33,7 +33,10 @@ class Password extends \Core\Controller
         $token = $this->route_params['token'];
         $user = User::findByPasswordReset($token);
 
-        echo '<pre>';
-        var_dump($user);
+        if($user) {
+            View::renderTemplate('Password/reset.html');
+        } else {
+            echo 'token invalid';
+        }
     }
 }
