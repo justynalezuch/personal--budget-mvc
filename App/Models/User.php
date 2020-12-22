@@ -80,7 +80,7 @@ class User extends \Core\Model
             $this->errors[] = 'Podaj poprawny adres email.';
         }
 
-        if (static::emailExists($this->email)) {
+        if (static::emailExists($this->email, $this->id ?? null)) {
             $this->errors[] = 'Istnieje już konto zarejestrowane na podany adres email.';
         }
 
@@ -112,9 +112,15 @@ class User extends \Core\Model
      * @param $email
      * @return bool
      */
-    public static function emailExists($email)
+    public static function emailExists($email, $ignore_id = null)
     {
-        return static::findByEmail($email) !== false;
+       $user = static::findByEmail($email);
+       if($user) {
+           if($user->id != $ignore_id) {
+               return true;
+           }
+       }
+       return false;
     }
 
     /**
@@ -275,5 +281,12 @@ class User extends \Core\Model
                 return $user;
             }
         }
+    }
+
+    public function resetPassword($password) {
+        $this->password = $password;
+        $this->validate();
+
+        return empty($this->errors);
     }
 }
