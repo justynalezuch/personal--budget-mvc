@@ -160,7 +160,7 @@ class User extends \Core\Model
     {
         $user = static::findByEmail($email);
 
-        if($user) {
+        if($user && $user->is_active) {
             if(password_verify($password, $user->password_hash)) {
                 return $user;
             }
@@ -336,6 +336,32 @@ class User extends \Core\Model
 
         \App\Mail::send($this->email, 'Account activation', $body, $altbody);
         echo 'send';
+    }
+
+
+    /**
+     * Activate the user account with the specified activation token
+     *
+     * @param string $value Activation token from the URL
+     *
+     * @return void
+     */
+    public static function activate($value)
+    {
+        $token = new Token($value);
+        $hashed_token = $token->getHash();
+
+        $sql = 'UPDATE users
+                SET is_active = 1,
+                    activation_hash = null
+                WHERE activation_hash = :hashed_token';
+
+        $db = static::getDB();
+        $stmt = $db->prepare($sql);
+
+        $stmt->bindValue(':hashed_token', $hashed_token, PDO::PARAM_STR);
+
+        $stmt->execute();
     }
 
 }
