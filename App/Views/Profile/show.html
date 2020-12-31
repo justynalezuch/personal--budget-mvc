@@ -4,14 +4,16 @@
 
 {% block body %}
 
-<h1>Profile</h1>
+    <h1>Profile</h1>
 
-<dl>
-    <dt>Nazwa:</dt>
-    <dd>{{user.name}}</dd>
-    <dt>Email:</dt>
-    <dd>{{user.email}}</dd>
-</dl>
+    <dl>
+        <dt>Nazwa:</dt>
+        <dd>{{user.name}}</dd>
+        <dt>Email:</dt>
+        <dd>{{user.email}}</dd>
+    </dl>
+
+    <a href="/profile/edit">Edit</a>
 
 
 {% endblock %}
