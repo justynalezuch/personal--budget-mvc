@@ -28,7 +28,8 @@
           </div>
           <div>
               <label for="inputPassword">Password</label>
-              <input type="password" id="inputPassword" name="password" placeholder="Password" />
+              <input type="password" id="inputPassword" name="password" placeholder="Password" aria-describedby="passwordHelpBlock"/>
+              <span id="passwordHelpBlock">Leave blank to keep current password</span>
           </div>
 
             <button type="submit">Save</button>
@@ -64,7 +65,6 @@
                     }
                 },
                 password: {
-                    required: true,
                     minlength: 6,
                     validPassword: true
                 },
