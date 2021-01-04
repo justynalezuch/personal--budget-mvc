@@ -393,8 +393,6 @@ class User extends \Core\Model
                 }
                 $sql .= ' WHERE id = :id;';
 
-                echo $sql; exit;
-
                 $db = static::getDB();
                 $stmt = $db->prepare($sql);
 

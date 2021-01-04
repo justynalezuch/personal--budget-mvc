@@ -10,10 +10,16 @@ use App\Auth;
 
 class Profile extends Authenticated
 {
+    public function before()
+    {
+        parent::before();
+        $this->user = Auth::getUser();
+    }
+
     public function showAction() {
 
         View::renderTemplate('Profile/show.html', [
-            'user' => Auth::getUser()
+            'user' => $this->user
         ]);
 
     }
@@ -21,21 +27,19 @@ class Profile extends Authenticated
     public function editAction() {
 
         View::renderTemplate('Profile/edit.html', [
-            'user' => Auth::getUser()
+            'user' => $this->user
         ]);
 
     }
 
     public function updateAction() {
 
-        $user = Auth::getUser();
-
-        if($user->updateProfile($_POST)) {
+        if($this->user->updateProfile($_POST)) {
             Flash::addMessage('Successfully updated profile data.');
             $this->redirect('/profile/show');
         } else {
             View::renderTemplate('Profile/edit.html', [
-                'user' => $user
+                'user' => $this->user
             ]);
         }
     }
